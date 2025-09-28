@@ -35,13 +35,11 @@ const OwnerNavbar: React.FC<OwnerNavbarProps> = ({
 }) => {
   const router = useRouter();
   const { user, logout } = useContext(AuthContext) || {};
-  const { 
-    ownerData, 
-    ownerName, 
-    primaryPropertyName, 
-    unreadNotificationsCount,
-    markNotificationAsRead 
-  } = useOwnerData();
+  const { ownerData, loading, error } = useOwnerData();
+  const ownerName = ownerData?.name || 'Owner';
+  const primaryPropertyName = 'My Property'; // Placeholder
+  const unreadNotificationsCount = 0; // Placeholder
+  const markNotificationAsRead = (id: string) => console.log(id); // Placeholder
   
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
