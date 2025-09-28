@@ -307,7 +307,7 @@ const OwnerNavbar: React.FC<OwnerNavbarProps> = ({
                     <span className="text-xs text-gray-500">{unreadNotificationsCount} unread</span>
                   </div>
                   <div className="max-h-80 overflow-y-auto">
-                    {ownerData.notifications.length > 0 ? (
+                    {ownerData && ownerData.notifications && ownerData.notifications.length > 0 ? (
                       ownerData.notifications.map((notification) => (
                         <div
                           key={notification.id}
@@ -381,7 +381,7 @@ const OwnerNavbar: React.FC<OwnerNavbarProps> = ({
                     {/* Owner Stats Badge */}
                     <div className="mt-3 flex items-center justify-between text-xs">
                       <span className="text-gray-500">Properties</span>
-                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">{ownerData.stats.totalProperties}</span>
+                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">{ownerData?.stats?.totalProperties || 0}</span>
                     </div>
                   </div>
                   <div className="p-2">
