@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
     const fetchContactContent = async () => {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:5000/api/content/contact?for=public');
+  const response = await fetch('https://pg-rental-system-backend.onrender.com/api/content/contact?for=public');
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setContent(data || {});
@@ -136,7 +136,7 @@ const Contact: React.FC = () => {
         }
       });
 
-      const response = await fetch('http://localhost:5000/api/contacts', {
+  const response = await fetch('https://pg-rental-system-backend.onrender.com/api/contacts', {
         method: 'POST',
         body: data,
       });

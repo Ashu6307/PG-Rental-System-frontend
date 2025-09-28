@@ -58,7 +58,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
     setConnectionStatus('connecting');
     setError(null);
 
-    const newSocket = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000', {
+  const newSocket = io(process.env.NEXT_PUBLIC_API_URL || 'https://pg-rental-system-backend.onrender.com', {
       auth: {
         token
       },

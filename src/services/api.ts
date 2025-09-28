@@ -1,7 +1,5 @@
 // Centralized API configuration
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.NEXT_PUBLIC_API_URL || 'https://your-production-api.com'
-  : 'http://localhost:5000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pg-rental-system-backend.onrender.com';
 
 interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
@@ -40,10 +38,7 @@ class ApiService {
       
       return await response.json();
     } catch (error) {
-      // Only show API errors in development
-      if (process.env.NODE_ENV === 'development') {
-        console.error(`API Error for ${endpoint}:`, error);
-      }
+      console.error(`API Error for ${endpoint}:`, error);
       throw error;
     }
   }

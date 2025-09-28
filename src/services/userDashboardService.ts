@@ -394,9 +394,7 @@ class UserDashboardService {
 
   // Download invoice PDF
   async downloadInvoicePDF(invoiceId: string): Promise<Blob> {
-    const baseURL = process.env.NODE_ENV === 'production' 
-      ? process.env.NEXT_PUBLIC_API_URL || 'https://your-production-api.com'
-      : 'http://localhost:5000';
+    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://pg-rental-system-backend.onrender.com';
       
     const response = await fetch(`${baseURL}/api/users/invoices/${invoiceId}/pdf`, {
       headers: {

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { FaStar, FaHeart } from "react-icons/fa";
 
-const API_URL = process.env.NEXT_PUBLIC_ABOUT_API || "http://localhost:5000/api/content/about";
+const API_URL = process.env.NEXT_PUBLIC_ABOUT_API || "https://pg-rental-system-backend.onrender.com/api/content/about";
 
 const defaultContent = {
   hero: { title: "About StayWheels", subtitle: "Our Story", description: ["Loading..."] },

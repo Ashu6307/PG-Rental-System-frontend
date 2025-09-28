@@ -381,7 +381,7 @@ export default function RegisterForm() {
 
   const handleGoogleAuth = () => {
     setLoading(true);
-    window.location.href = `http://localhost:5000/api/auth/google?role=${role}`;
+  window.location.href = `https://pg-rental-system-backend.onrender.com/api/auth/google?role=${role}`;
   };
 
   // Navigation with flip animation
