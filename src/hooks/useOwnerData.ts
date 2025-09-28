@@ -6,6 +6,10 @@ interface OwnerData {
   id?: string;
   name?: string;
   email?: string;
+  notifications?: any[];
+  stats?: {
+    totalProperties?: number;
+  };
   // ...add more fields as needed
 }
 
