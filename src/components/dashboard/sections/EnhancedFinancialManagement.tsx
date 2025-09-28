@@ -16,7 +16,7 @@ import {
 
 import { ownerDashboardService } from '../../../services/ownerDashboardService';
 import type { 
-  EnhancedDashboardOverview, 
+  DashboardOverview, 
   PaymentOverview 
 } from '../../../services/ownerDashboardService';
 
@@ -29,7 +29,7 @@ interface FinancialStats {
 }
 
 const EnhancedFinancialManagement = () => {
-  const [financialData, setFinancialData] = useState<EnhancedDashboardOverview | null>(null);
+  const [financialData, setFinancialData] = useState<DashboardOverview | null>(null);
   const [paymentData, setPaymentData] = useState<PaymentOverview | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -66,12 +66,12 @@ const EnhancedFinancialManagement = () => {
   }
 
   const financialStats: FinancialStats = {
-    totalRevenue: financialData?.tenants.enhanced?.totalRevenue || 0,
-    monthlyGrowth: financialData?.financial.revenueGrowth || 0,
-    pendingDues: financialData?.tenants.enhanced?.totalDues || 0,
-    overdueCount: financialData?.tenants.enhanced?.overdueCount || 0,
-    collectionRate: paymentData ? 
-      ((paymentData.overview.totalExpectedRevenue - paymentData.overview.totalDues) / paymentData.overview.totalExpectedRevenue * 100) : 0
+    totalRevenue: financialData?.monthlyRevenue || 0,
+    monthlyGrowth: 0, // Placeholder
+    pendingDues: financialData?.pendingPayments || 0,
+    overdueCount: paymentData?.overdueTenants || 0,
+    collectionRate: paymentData && paymentData.totalRevenue > 0 ? 
+      ((paymentData.totalRevenue - paymentData.pendingAmount) / paymentData.totalRevenue * 100) : 0
   };
 
   return (
@@ -133,7 +133,7 @@ const EnhancedFinancialManagement = () => {
             <div>
               <p className="text-gray-500 text-sm font-medium">Monthly Revenue</p>
               <p className="text-2xl font-bold text-gray-900">
-                ₹{(financialData?.financial.currentMonthRevenue || 0 / 1000).toFixed(0)}K
+                ₹{((financialData?.monthlyRevenue || 0) / 1000).toFixed(0)}K
               </p>
             </div>
             <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
@@ -142,7 +142,7 @@ const EnhancedFinancialManagement = () => {
           </div>
           <div className="mt-4">
             <p className="text-sm text-gray-500">
-              Last month: ₹{(financialData?.financial.lastMonthRevenue || 0 / 1000).toFixed(0)}K
+              {/* Last month data not available */}
             </p>
           </div>
         </div>
@@ -213,17 +213,17 @@ const EnhancedFinancialManagement = () => {
                 <span className="text-gray-700">Monthly Rent</span>
               </div>
               <span className="font-semibold text-gray-900">
-                ₹{((financialData?.financial.currentMonthRevenue || 0) * 0.8 / 1000).toFixed(0)}K
+                ₹{((financialData?.monthlyRevenue || 0) * 0.8 / 1000).toFixed(0)}K
               </span>
             </div>
             
             <div className="flex justify-between items-center">
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                <span className="text-gray-700">Electricity Bills</span>
+                <span className="text-gray-700">Pending Payments</span>
               </div>
               <span className="font-semibold text-gray-900">
-                ₹{(financialData?.financial.pendingElectricityAmount || 0 / 1000).toFixed(1)}K
+                ₹{((financialData?.pendingPayments || 0) / 1000).toFixed(1)}K
               </span>
             </div>
             
@@ -233,7 +233,7 @@ const EnhancedFinancialManagement = () => {
                 <span className="text-gray-700">Security Deposits</span>
               </div>
               <span className="font-semibold text-gray-900">
-                ₹{(paymentData?.overview.totalAdvance || 0 / 1000).toFixed(1)}K
+                ₹{((paymentData?.pendingAmount || 0) / 1000).toFixed(1)}K
               </span>
             </div>
             
@@ -243,7 +243,7 @@ const EnhancedFinancialManagement = () => {
                 <span className="text-gray-700">Other Charges</span>
               </div>
               <span className="font-semibold text-gray-900">
-                ₹{((financialData?.financial.currentMonthRevenue || 0) * 0.1 / 1000).toFixed(0)}K
+                ₹{((financialData?.monthlyRevenue || 0) * 0.1 / 1000).toFixed(0)}K
               </span>
             </div>
           </div>
@@ -266,13 +266,13 @@ const EnhancedFinancialManagement = () => {
             
             <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium text-yellow-800">Pending Electricity</span>
+                <span className="text-sm font-medium text-yellow-800">Pending Dues</span>
                 <span className="text-sm font-bold text-yellow-900">
-                  ₹{(financialData?.financial.pendingElectricityAmount || 0 / 1000).toFixed(1)}K
+                  ₹{((financialData?.pendingPayments || 0) / 1000).toFixed(1)}K
                 </span>
               </div>
               <p className="text-xs text-yellow-600">
-                {financialData?.financial.pendingElectricityBills} bills pending
+                {/* bills pending */}
               </p>
             </div>
             
@@ -326,14 +326,14 @@ const EnhancedFinancialManagement = () => {
                     <td className="px-4 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-medium text-gray-900">{payment.tenantName}</div>
-                        <div className="text-sm text-gray-500">{payment.tenantPhone}</div>
+                        <div className="text-sm text-gray-500">{/* payment.tenantPhone */}</div>
                       </div>
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
-                        {payment.propertyType} - {payment.roomNumber}
+                        {/* payment.propertyType */} - {/* payment.roomNumber */}
                       </div>
-                      <div className="text-sm text-gray-500">{payment.propertyName}</div>
+                      <div className="text-sm text-gray-500">{/* payment.propertyName */}</div>
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap">
                       <span className="text-sm font-semibold text-green-600">
@@ -363,7 +363,7 @@ const EnhancedFinancialManagement = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center">
             <div className="text-3xl font-bold text-gray-900 mb-2">
-              {paymentData?.overview.activeTenants || 0}
+              {paymentData?.overdueTenants || 0}
             </div>
             <div className="text-sm text-gray-500 flex items-center justify-center">
               <Users className="h-4 w-4 mr-1" />
@@ -373,7 +373,7 @@ const EnhancedFinancialManagement = () => {
           
           <div className="text-center">
             <div className="text-3xl font-bold text-gray-900 mb-2">
-              {financialData?.overview.totalProperties || 0}
+              {financialData?.totalProperties || 0}
             </div>
             <div className="text-sm text-gray-500 flex items-center justify-center">
               <Building2 className="h-4 w-4 mr-1" />
@@ -383,7 +383,7 @@ const EnhancedFinancialManagement = () => {
           
           <div className="text-center">
             <div className="text-3xl font-bold text-gray-900 mb-2">
-              ₹{((paymentData?.overview.totalExpectedRevenue || 0) / 1000).toFixed(0)}K
+              ₹{((paymentData?.totalRevenue || 0) / 1000).toFixed(0)}K
             </div>
             <div className="text-sm text-gray-500 flex items-center justify-center">
               <IndianRupee className="h-4 w-4 mr-1" />
