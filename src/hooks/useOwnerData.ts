@@ -9,6 +9,11 @@ interface OwnerData {
   notifications?: any[];
   stats?: {
     totalProperties?: number;
+    totalTenants?: number;
+    pendingPayments?: number;
+    maintenanceRequests?: number;
+    occupancyRate?: number;
+    monthlyRevenue?: number;
   };
   // ...add more fields as needed
 }

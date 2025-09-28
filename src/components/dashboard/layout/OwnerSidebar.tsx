@@ -37,7 +37,9 @@ const OwnerSidebar: React.FC<OwnerSidebarProps> = ({
   isOpen,
   onClose
 }) => {
-  const { ownerData, ownerName, primaryPropertyName } = useOwnerData();
+  const { ownerData, loading, error } = useOwnerData();
+  const ownerName = ownerData?.name || 'Owner';
+  const primaryPropertyName = 'My Property'; // Placeholder
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
   const toggleMenu = (menuId: string) => {
@@ -58,7 +60,7 @@ const OwnerSidebar: React.FC<OwnerSidebarProps> = ({
       label: 'Property Management',
       icon: Building2,
       description: 'Manage all properties',
-      badge: ownerData.stats.totalProperties.toString(),
+      badge: (ownerData?.stats?.totalProperties || 0).toString(),
       subItems: [
         { id: 'properties-overview', label: 'Properties Overview', icon: Eye },
         { id: 'add-property', label: 'Add New Property', icon: PlusCircle },
@@ -72,7 +74,7 @@ const OwnerSidebar: React.FC<OwnerSidebarProps> = ({
       label: 'Tenant Management',
       icon: Users,
       description: 'Manage all tenants',
-      badge: ownerData.stats.totalTenants.toString(),
+      badge: (ownerData?.stats?.totalTenants || 0).toString(),
       subItems: [
         { id: 'tenants-overview', label: 'All Tenants', icon: Users },
         { id: 'add-tenant', label: 'Add New Tenant', icon: PlusCircle },
@@ -86,7 +88,7 @@ const OwnerSidebar: React.FC<OwnerSidebarProps> = ({
       label: 'Financial Management',
       icon: IndianRupee,
       description: 'Payments & revenue tracking',
-      badge: ownerData.stats.pendingPayments > 0 ? ownerData.stats.pendingPayments.toString() : undefined,
+      badge: ownerData?.stats?.pendingPayments && ownerData.stats.pendingPayments > 0 ? ownerData.stats.pendingPayments.toString() : undefined,
       subItems: [
         { id: 'payments-overview', label: 'Payment Dashboard', icon: DollarSign },
         { id: 'payment-collection', label: 'Collect Payments', icon: IndianRupee },
@@ -113,7 +115,7 @@ const OwnerSidebar: React.FC<OwnerSidebarProps> = ({
       label: 'Maintenance & Services',
       icon: Wrench,
       description: 'Property maintenance',
-      badge: ownerData.stats.maintenanceRequests > 0 ? ownerData.stats.maintenanceRequests.toString() : undefined,
+      badge: ownerData?.stats?.maintenanceRequests && ownerData.stats.maintenanceRequests > 0 ? ownerData.stats.maintenanceRequests.toString() : undefined,
       subItems: [
         { id: 'maintenance-requests', label: 'Active Requests', icon: Wrench },
         { id: 'maintenance-schedule', label: 'Maintenance Schedule', icon: Calendar },
@@ -151,24 +153,24 @@ const OwnerSidebar: React.FC<OwnerSidebarProps> = ({
   const quickStats = [
     {
       label: 'Occupancy Rate',
-      value: `${ownerData.stats.occupancyRate}%`,
+      value: `${ownerData?.stats?.occupancyRate || 0}%`,
       icon: TrendingUp,
       color: 'bg-green-500',
       trend: 'up'
     },
     {
       label: 'Monthly Revenue',
-      value: `₹${(ownerData.stats.monthlyRevenue / 1000).toFixed(0)}K`,
+      value: `₹${((ownerData?.stats?.monthlyRevenue || 0) / 1000).toFixed(0)}K`,
       icon: IndianRupee,
       color: 'bg-blue-500',
       trend: 'up'
     },
     {
       label: 'Pending Payments',
-      value: ownerData.stats.pendingPayments.toString(),
+      value: (ownerData?.stats?.pendingPayments || 0).toString(),
       icon: Clock,
-      color: ownerData.stats.pendingPayments > 0 ? 'bg-red-500' : 'bg-green-500',
-      trend: ownerData.stats.pendingPayments > 0 ? 'down' : 'stable'
+      color: ownerData?.stats?.pendingPayments && ownerData.stats.pendingPayments > 0 ? 'bg-red-500' : 'bg-green-500',
+      trend: ownerData?.stats?.pendingPayments && ownerData.stats.pendingPayments > 0 ? 'down' : 'stable'
     }
   ];
 
