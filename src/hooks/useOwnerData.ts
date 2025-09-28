@@ -1,8 +1,16 @@
 // src/hooks/useOwnerData.ts
 import { useState, useEffect } from 'react';
 
+interface OwnerData {
+  // Add actual fields as per your backend response
+  id?: string;
+  name?: string;
+  email?: string;
+  // ...add more fields as needed
+}
+
 export default function useOwnerData() {
-  const [ownerData, setOwnerData] = useState<any>(null);
+  const [ownerData, setOwnerData] = useState<OwnerData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
