@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/context/AuthContext';
-import { useOwnerData } from '@/hooks/useOwnerData';
+import useOwnerData from '@/hooks/useOwnerData';
 import { 
   Building2, 
   Bell, 

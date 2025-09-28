@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useOwnerData } from '@/hooks/useOwnerData';
+import useOwnerData from '@/hooks/useOwnerData';
 import { 
   Home,
   Building2,
