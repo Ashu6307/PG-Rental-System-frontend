@@ -1,8 +1,5 @@
 'use client';
 
-/* eslint-disable react/forbid-dom-props, @typescript-eslint/no-inline-styles */
-// Inline styles are necessary for dynamic chart rendering
-
 import React, { useState } from 'react';
 import { 
   BarChart3, 
