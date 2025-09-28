@@ -1,6 +1,6 @@
 // API Configuration - Matching old frontend pattern
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.NEXT_PUBLIC_API_URL || 'https://your-production-api.com'
+  ? process.env.NEXT_PUBLIC_API_URL || 'https://pg-rental-system-backend.onrender.com'
   : 'http://localhost:5000';
 
 export const API_CONFIG = {
