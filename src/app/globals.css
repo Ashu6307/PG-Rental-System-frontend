@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom spacing utility */
+.py-15 {
+  padding-top: 3.75rem; /* 60px */
+  padding-bottom: 3.75rem; /* 60px */
+}
+
+/* Line clamp utility for text wrapping */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Horizontal Carousel Styles */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Infinite scroll carousel - Ultra-smooth CSS Animation */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.horizontal-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 32px;
+  animation: infiniteScroll 45s linear infinite;
+  width: fit-content;
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden; /* Smooth rendering */
+  perspective: 1000px; /* Better 3D rendering */
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.carousel-track.paused {
+  animation-play-state: paused;
+}
+
+.carousel-slide {
+  flex: 0 0 auto;
+  width: 350px;
+  min-width: 350px;
+  max-width: 350px;
+}
+
+/* Ultra-smooth infinite scroll with 3D transforms */
+@keyframes infiniteScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+.carousel-card {
+  flex: 0 0 auto;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  width: 420px;
+  min-width: 420px;
+  max-width: 420px;
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU layer */
+  backface-visibility: hidden; /* Prevent flickering */
+}
+
+.carousel-card:hover {
+  transform: translateY(-8px) translateZ(0);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* OTP Input paste shake animation */
+.animate-shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}

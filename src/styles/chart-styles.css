@@ -1,0 +1,50 @@
+/* Chart Component Dynamic Styles */
+
+/* Chart container heights */
+.chart-height-150 { height: 150px; }
+.chart-height-200 { height: 200px; }
+.chart-height-250 { height: 250px; }
+.chart-height-300 { height: 300px; }
+.chart-height-400 { height: 400px; }
+
+/* Dynamic bar widths for charts */
+.bar-width-10 { width: 10%; }
+.bar-width-20 { width: 20%; }
+.bar-width-30 { width: 30%; }
+.bar-width-40 { width: 40%; }
+.bar-width-50 { width: 50%; }
+.bar-width-60 { width: 60%; }
+.bar-width-70 { width: 70%; }
+.bar-width-80 { width: 80%; }
+.bar-width-90 { width: 90%; }
+.bar-width-100 { width: 100%; }
+
+/* Pie chart sizes */
+.pie-size-80 { width: 80px; height: 80px; }
+.pie-size-100 { width: 100px; height: 100px; }
+.pie-size-120 { width: 120px; height: 120px; }
+.pie-size-150 { width: 150px; height: 150px; }
+.pie-size-200 { width: 200px; height: 200px; }
+
+/* SVG stroke and fill styles */
+.stroke-blue-500 { stroke: #3b82f6; }
+.stroke-green-500 { stroke: #10b981; }
+.stroke-red-500 { stroke: #ef4444; }
+.stroke-yellow-500 { stroke: #eab308; }
+.stroke-purple-500 { stroke: #a855f7; }
+
+.fill-blue-500 { fill: #3b82f6; }
+.fill-green-500 { fill: #10b981; }
+.fill-red-500 { fill: #ef4444; }
+.fill-yellow-500 { fill: #eab308; }
+.fill-purple-500 { fill: #a855f7; }
+
+/* Chart animation styles */
+.chart-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Dynamic bar chart utility */
+.dynamic-bar-chart .bar-item {
+  transition: width 0.3s ease-in-out;
+}
